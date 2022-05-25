@@ -24,6 +24,7 @@ server - get server info
 speedtest - test speed of server
 restart - restart bot
 ```
+https://heroku.com/deploy
 
 ## Deploy on VPS: 
 
