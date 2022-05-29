@@ -32,7 +32,7 @@ async def upload_media_pyro(client, message, sender, file):
                         video=file,
                         width=width,
                         height=height,
-                        caption= f'`{caption}`',
+                        caption= f'**{caption}**',
                         parse_mode= enums.ParseMode.MARKDOWN ,
                         thumb= thumb_path,
                         supports_streaming=True,
@@ -50,7 +50,7 @@ async def upload_media_pyro(client, message, sender, file):
                 await client.send_document(
                     chat_id= sender,
                     document= file, 
-                    caption= f'`{caption}`',
+                    caption= f'**{caption}**',
                     parse_mode= enums.ParseMode.MARKDOWN,
                     progress=progress_for_pyrogram,
                     progress_args=(
