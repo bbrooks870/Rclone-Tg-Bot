@@ -2,6 +2,8 @@ class Commands:
     START = "start"
     MIRROR = "mirror"
     MIRRORSET = "mirrorset"
+    ZIPMIRROR = "zipmirror"
+    UNZIPMIRROR = "unzipmirror"
     LEECH= "leech"
     COPY = "copy"
     MYFILES= "myfiles"

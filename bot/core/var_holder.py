@@ -4,8 +4,7 @@ import os
 import logging
 from bot.consts.ExecVars import Constants
 
-log = logging.getLogger(__name__)
-
+LOGGER = logging.getLogger(__name__)
 
 class VarHolder:
     def __init__(self):
@@ -33,7 +32,11 @@ class VarHolder:
             "EDIT_SLEEP_SECS"
         ]
 
-        BOOLS = ["UPLOAD_CANCEL"]
+        BOOLS = [
+            "UPLOAD_CANCEL",
+            "IS_ZIP",
+            "EXTRACT",
+        ]
         
         if variable == "ALLOWED_CHATS":
             if envval is not None:
@@ -63,10 +66,7 @@ class VarHolder:
             val = envval if envval is not None else val
 
         if val is None:
-            log.error(
-                "The variable was not found in either the constants or environment Variable is :- {}".format(
-                    variable))
-            raise Exception("The variable was not found in either the constants or environment")
+            LOGGER.error("The variable was not found in either the constants or environment, variable is :- {}".format(variable))
             
         if isinstance(val, str):
             val = val.strip()
