@@ -1,114 +1,23 @@
-# An Rclone Telegram bot to transfer to and from many clouds
-
-## Features:
-
-- Mirror from Telegram to cloud.
-- Mirror batch up to 100 files at once from Telegram to cloud (private or public channel)
-- Zip/Unzip from Telegram to cloud
-- Leech files and folders from cloud to Telegram.
-- Copy from cloud to cloud.
-- Button panels to interact with clouds.
-- Renaming of Telegram files.
-- Progress bar when downloading and uploading.
-
-## Commands for bot(set through @BotFather)
-
-```
-mirror - mirror to selected cloud 
-zipmirror - mirror and zip to cloud 
-unzipmirror - mirror and extract to cloud 
-mirrorbatch - mirror files in batch to cloud 
-mirrorset - select cloud/folder where to mirror
-leech - leech from cloud to Telegram
-copy - copy from cloud to cloud
-myfiles - file manager
-logs - get logs from server
-server - get server info
-speedtest - test speed of server
-restart - restart bot
-```
-https://heroku.com/deploy
-
-## Deploying on Heroku
-<p><a href="https://github.com/Sam-Max/Rclone-Tg-Bot/tree/heroku"> <img src="https://img.shields.io/badge/Deploy%20Guide-blueviolet?style=for-the-badge&logo=heroku" width="170""/></a></p>
+# Heroku Deploy
 
 
-## Deploy on VPS: 
+## Deploy With Github Workflow
 
-1. **Installing requirements**
+1. Go to Repository Settings -> Secrets 
 
- - Clone repo:
+2. Add the below Mandatory Variables one by one (clicking New Repository Secret)
 
-        git clone https://github.com/Sam-Max/Rclone-Tg-Bot rclonetgbot/ && cd rclonetgbot
+    - HEROKU_EMAIL: Heroku Account Email 
+    - HEROKU_API_KEY: Your Heroku API key
+    - HEROKU_APP_NAME: Your Heroku app name (unique)
+    - CONFIG_FILE_URL: Copy the sample_config.env content and paste in any text editor. Go to https://gist.github.com and paste your config data and fill mandatory variables. Rename the file to config.env and then create secret gist. Click on Raw, copy the link: this link will be your CONFIG_FILE_URL.
 
- - Install Docker(skip this if deploying without docker).
+3. After that go to Github Actions tab in your repository. Select Manually Deploy to Heroku workflow.
 
-        sudo apt install snapd
-        sudo snap install docker
-
-2. **Set up config file**
-
-- cp config_sample.env config.env 
-
-- Fill up variables:
-
-   - Mandatory variables:
-        - `API_ID`: get this from https://my.telegram.org. Don't put this in quotes.
-        - `API_HASH`: get this from https://my.telegram.org
-        - `OWNER_ID`: your Telegram User ID (not username) of the owner of the bot.
-        - `ALLOWED_USERS`: list of IDs of allowed users who can use this bot separated by spaces
-        - `ALLOWED_CHATS`: list of IDs of allowed chats who can use this bot separated by spaces
-        - `BOT_TOKEN`: The Telegram Bot Token (get from @BotFather) 
-        - `RCLONE_CONFIG`: content of the rclone.conf file generated with rclone command-line program.
-
-   - Non mandatory variables:
-        - `UPSTREAM_REPO`: if your repo is private add your github repo link with format: `https://username:{githubtoken}@github.com/{username}/{reponame}`, so you can update your app from private repository on each restart. Get token from [Github settings](https://github.com/settings/tokens)
-        - `SESSION`: Pyrogram Session: To generate string session use this command `python3 generate_string_session.py` on repo folder. 
-        - `UPSTREAM_BRANCH`: Upstream branch for update. 
-        - `TG_SPLIT_SIZE`: Telegram upload limit in bytes (max `2097151000` which is ~2GB), to automatically slice the file bigger that this size into small parts to upload to Telegram.
-        - `EDIT_SLEEP_SECS`: Seconds for update the progress message regulary. Default to 10. 
-
-3. **Deploying on VPS Using Docker**
-
-- Start Docker daemon (skip if already running), if installed by snap then use 2nd command:
-    
-        sudo dockerd
-        sudo snap start docker
-
-     Note: If not started or not starting, run the command below then try to start.
-
-        sudo apt install docker.io
-
-- Build Docker image:
-
-        sudo docker build . -t rclonetg-bot 
-
-- Run the image:
-
-        sudo docker run rclonetg-bot 
-
-- To stop the image:
-
-        sudo docker ps
-        sudo docker stop id
-
-- To clear the container:
-
-        sudo docker container prune
-
-- To delete the images:
-
-        sudo docker image prune -a
+4. Choose heroku branch then click on Run workflow
 
 
-## Repositories used to develop this bot:
 
-1- [TorToolkit-Telegram](https://github.com/yash-dk/TorToolkit-Telegram).
+  
 
-2- [Rclone](https://github.com/rclone/rclone).
 
-3- [Telethon]() and [Pyrogram]().
-
-4- [Conversation-Pyrogram](https://github.com/Ripeey/Conversation-Pyrogram/archive/refs/heads/main.zip).
-
-5- Others referenced in code.
